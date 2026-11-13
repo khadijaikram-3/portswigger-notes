@@ -18,4 +18,14 @@ This lab has an admin panel at an unpredictable location. Solve the lab by findi
        adminPanelTag.setAttribute('href', '/admin-tp0r3e');
        // ...
    }
-5. Then I put the /admin-tp0r3e at the end of URL and I login as admin and deleted carlos user.
+## Exploitation Steps
+1. Copied the hidden URL path (/admin-tp0r3e) from the JavaScript source code.
+2. Appended it to the lab's base URL in the browser address bar.
+3. The admin panel loaded directly.
+4. Located the user carlos and clicked "Delete".
+
+## Result
+User carlos deleted. Lab solved.
+
+## Key Takeaway
+Security by obscurity is not security. Hiding a URL in JavaScript does not protect it. The client-side code (HTML/JS) is visible to anyone who looks at the page source. Access control must be enforced on the server side
