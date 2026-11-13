@@ -16,3 +16,21 @@ Think of a hotel:
 
 ## Why is it so common?
 Developers often rely on "security through obscurity" (hiding buttons with CSS) instead of enforcing server-side permission checks. Hackers bypass the UI using tools like Burp Suite.
+
+## Security by Obscurity (Unpredictable URLs)
+Developers sometimes try to hide sensitive functionality by giving it a less predictable URL (e.g., `https://insecure-website.com/administrator-panel-yb556`). 
+
+They think, *"Nobody will ever guess `yb556`! It's totally safe!"* This is a fatal mistake.
+
+**How Hackers Exploit This:**
+If the admin link is hidden using JavaScript (e.g., `if (isAdmin) { show link }`), the browser still has to download that JavaScript file. This means the secret URL is sitting right there in the source code. 
+
+**The Exploit Steps:**
+1. Log in as a normal user.
+2. Right-click the page and select **"View Page Source"** (or press `Ctrl+U`).
+3. Search the code for words like `admin`, `href`, or `panel`.
+4. Find the hidden URL in the JavaScript.
+5. Paste the URL into the browser to access the admin panel.
+
+**The Lesson:** The server must enforce access control. The client-side browser (JavaScript) cannot be trusted to hide anything.
+
