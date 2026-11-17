@@ -34,3 +34,17 @@ If the admin link is hidden using JavaScript (e.g., `if (isAdmin) { show link }`
 
 **The Lesson:** The server must enforce access control. The client-side browser (JavaScript) cannot be trusted to hide anything.
 
+## Parameter-Based Access Control Methods
+Some applications determine the user's access rights or role at login, and then store this information in a user-controllable location.
+
+**The 3 Insecure Locations:**
+1. **Hidden Fields:** `<input type="hidden" name="role" value="user">` (Can be edited in page source).
+2. **Cookies:** `Admin=false` (Can be edited in Developer Tools).
+3. **Query String Parameters:** `?role=user` (Can be changed in the URL).
+
+**The Fatal Flaw:**
+The server makes access control decisions based on the submitted value. The server never checks a secure database to see if the user is *actually* an admin. It just trusts the client's browser.
+
+**The Lesson:**
+Never trust the client. Authorization checks must be performed on the server-side.
+
