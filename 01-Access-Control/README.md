@@ -47,4 +47,20 @@ The server makes access control decisions based on the submitted value. The serv
 
 **The Lesson:**
 Never trust the client. Authorization checks must be performed on the server-side.
+## Horizontal Privilege Escalation (IDOR)
+Horizontal privilege escalation occurs when a user gains access to resources belonging to **another user** at the **same privilege level** (e.g., Normal User A accessing Normal User B's data).
+
+**IDOR (Insecure Direct Object Reference):** This happens when user-controller parameter values (like `id=123`) are used to access resources directly without checking if the user is authorized to view them.
+
+**Unpredictable IDs (GUIDs):** 
+- Developers sometimes use Globally Unique Identifiers (GUIDs) instead of predictable numbers. 
+- This is "Security by Obscurity" and is not secure.
+- **How Hackers Exploit It:** GUIDs are often leaked in other parts of the app, such as public comments, reviews, or blog posts. 
+
+**Quick Comparison:**
+| Feature | Horizontal | Vertical |
+| :--- | :--- | :--- |
+| **Target** | Another Normal User | The Admin |
+| **Goal** | Steal someone else's data | Gain higher permissions |
+| **Example** | Changing `id=123` to `id=124` | Changing `Admin=false` to `Admin=true` |
 
